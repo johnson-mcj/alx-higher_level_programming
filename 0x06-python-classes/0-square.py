@@ -15,4 +15,3 @@ class Square:
         Initializes an empty Square object.
         """
         pass
-
