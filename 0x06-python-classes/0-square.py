@@ -1,6 +1,17 @@
 #!/usr/bin/python3
+
+"""
+This module defines the Square class.
+"""
+
 class Square:
     """
-    Class Square that defines a square.
+    This class represents a square.
     """
-    pass
+
+    def __init__(self):
+        """
+        Initializes an empty Square object.
+        """
+        pass
+
