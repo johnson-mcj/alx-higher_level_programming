@@ -1,55 +1,60 @@
 #!/usr/bin/python3
-
 """
-This module defines the Node and SinglyLinkedList classes.
+Module documentation: Singly Linked List
 """
 
 
 class Node:
     """
-    This class represents a node of a singly linked list.
+    Node class represents a node of a singly linked list.
     """
 
     def __init__(self, data, next_node=None):
         """
-        Initializes a Node object with data and optional next_node.
+        Initializes a Node object with a given data value and next node.
 
         Args:
-            data (int): The data of the node.
-            next_node (Node): The next node in the linked list. Default is None.
+            data (int): The data value of the node.
+            next_node (Node): The next node in the linked list.
+
+        Raises:
+            TypeError: If the data is not an integer.
+            TypeError: If the next_node is not None or a Node object.
         """
+        self.__data = None
         self.data = data
+        self.__next_node = None
         self.next_node = next_node
 
     @property
     def data(self):
         """
-        Getter method for the data attribute.
+        Retrieves the data value of the node.
 
         Returns:
-            int: The data of the node.
+            int: The data value of the node.
         """
         return self.__data
 
     @data.setter
     def data(self, value):
         """
-        Setter method for the data attribute.
+        Sets the data value of the node.
 
         Args:
-            value (int): The data of the node.
+            value (int): The data value to be set.
 
         Raises:
-            TypeError: If value is not an integer.
+            TypeError: If the data is not an integer.
         """
         if not isinstance(value, int):
-            raise TypeError("data must be an integer")
+            raise TypeError('data must be an integer')
         self.__data = value
 
     @property
     def next_node(self):
         """
-        Getter method for the next_node attribute.
+        Retrieves the next node in the linked list.
 
         Returns:
             Node: The next node in the linked list.
@@ -59,22 +64,22 @@ class Node:
     @next_node.setter
     def next_node(self, value):
         """
-        Setter method for the next_node attribute.
+        Sets the next node in the linked list.
 
         Args:
-            value (Node): The next node in the linked list.
+            value (Node): The next node to be set.
 
         Raises:
-            TypeError: If value is not None or a Node object.
+            TypeError: If the next_node is not None or a Node object.
         """
         if value is not None and not isinstance(value, Node):
-            raise TypeError("next_node must be a Node object")
+            raise TypeError('next_node must be a Node object')
         self.__next_node = value
 
 
 class SinglyLinkedList:
     """
-    This class represents a singly linked list.
+    SinglyLinkedList class represents a singly linked list.
     """
 
     def __init__(self):
@@ -85,21 +90,19 @@ class SinglyLinkedList:
 
     def sorted_insert(self, value):
         """
-        Inserts a new Node into the correct sorted position in the list (increasing order).
+        Inserts a new Node into the correct sorted position in the linked list.
 
         Args:
-            value (int): The value to be inserted.
+            value (int): The data value of the new node to be inserted.
         """
         new_node = Node(value)
 
-        if self.head is None:
-            self.head = new_node
-        elif value < self.head.data:
+        if self.head is None or value < self.head.data:
             new_node.next_node = self.head
             self.head = new_node
         else:
             current = self.head
-            while current.next_node is not None and value >= current.next_node.data:
+            while current.next_node is not None and current.next_node.data < value:
                 current = current.next_node
             new_node.next_node = current.next_node
             current.next_node = new_node
@@ -111,9 +114,12 @@ class SinglyLinkedList:
         Returns:
             str: The string representation of the linked list.
         """
-        result = ""
+        if self.head is None:
+            return ""
+
         current = self.head
-        while current is not None:
-            result += str(current.data) + "\n"
+        result = str(current.data)
+        while current.next_node is not None:
             current = current.next_node
+            result += '\n' + str(current.data)
         return result
