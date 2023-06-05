@@ -1,4 +1,15 @@
 #!/usr/bin/python3
+"""
+Module documentation: Rectangle
+"""
+
 class Rectangle:
-    """ Empty class """
-    pass
+    """
+    Rectangle class represents a rectangle.
+    """
+
+    def __init__(self):
+        """
+        Initializes a Rectangle object.
+        """
+        pass
